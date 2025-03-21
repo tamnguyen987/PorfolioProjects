@@ -1,0 +1,43 @@
+-- PART 1: Total Cases by Age Group
+SELECT AGE_GROUP, COUNT(*) AS Total_Cases
+FROM [TamPortfolioProject].[dbo].[NYPD_Arrest_Data_2024]
+GROUP BY AGE_GROUP
+ORDER BY Total_Cases DESC;
+
+
+-- PART 2: Total Cases by Offense Type
+SELECT 
+    OFNS_DESC AS Offense_Type, 
+    COUNT(*) AS Total_Cases, 
+    ROUND((COUNT(*) * 100.0 / (SELECT COUNT(*) FROM [TamPortfolioProject].[dbo].[NYPD_Arrest_Data_2024])), 2) AS Percentage
+FROM [TamPortfolioProject].[dbo].[NYPD_Arrest_Data_2024]
+GROUP BY OFNS_DESC
+ORDER BY Total_Cases DESC;
+
+--PART 3: Total Cases by RACE
+SELECT 
+    PERP_RACE AS Race, 
+    COUNT(*) AS Total_Cases
+FROM [TamPortfolioProject].[dbo].[NYPD_Arrest_Data_2024]
+GROUP BY PERP_RACE
+ORDER BY Total_Cases DESC;
+
+--PART 4: Total Cases by GENDER
+SELECT 
+    PERP_SEX AS Gender, 
+    COUNT(*) AS Total_Cases
+FROM [TamPortfolioProject].[dbo].[NYPD_Arrest_Data_2024]
+GROUP BY PERP_SEX
+ORDER BY Total_Cases DESC;
+
+
+--PART 5: Analyze monthly crime trends 
+SELECT 
+    MONTH(ARREST_DATE) AS month,
+    COUNT(*) AS total_cases
+FROM 
+    [TamPortfolioProject].[dbo].[NYPD_Arrest_Data_2024]
+GROUP BY 
+    MONTH(ARREST_DATE)
+ORDER BY 
+    month DESC;
